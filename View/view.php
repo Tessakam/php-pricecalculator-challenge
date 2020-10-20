@@ -20,10 +20,13 @@
                 aria-haspopup="true" aria-expanded="false">
             Product
         </button>
+
         <div class="dropdown-menu">
-            <span class="dropdown-item-text">Dropdown item text</span>
-            <a class="dropdown-item" href="#!">Action</a>
+            <?php foreach ($products as $product): ?>
+            <a class="dropdown-item" value="" name="<?php echo $product['name'] ?>" ><?php echo $product['name'] ?></a>
+            <?php endforeach; ?>
         </div>
+
     </div>
 
     <div class="dropdown open">

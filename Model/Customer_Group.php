@@ -2,8 +2,8 @@
 
 
 class Customer_Group
-{  /** @var array Customer[] */
-    private array customers;
+{  ///** @var array Customer[] */
+   // private array customers;
 private string $name;
 private int $fixed_discount, $variable_discount, $id;
 

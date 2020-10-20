@@ -11,18 +11,23 @@ require '../Model/Customer.php';
 require '../Model/Product.php';
 require '../Model/Customer_Group.php';
 require '../config.php';
+
 $pdo = openConnection($dbuser,$dbpass);
 
-
 //$example_id=10;
-//
-//$handle = $pdo->prepare('SELECT id, firstname FROM customer where id = :id');
+//$handle = $pdo->prepare('SELECT id, name FROM product where id = :id');
 //$handle->bindValue(':id', $example_id);
 //$handle->execute();
 //$selectedProduct = $handle->fetch();
 //
 //var_dump($selectedProduct);
 
-//This segment marks all the checkboxes with all the current sports for an existing user when you update him. Currently that is not working however. :-(
+
+$getProducts = $pdo->prepare("SELECT name FROM product ORDER BY id ASC");
+$getProducts->execute();
+$products = $getProducts->fetchAll();
+
+//foreach ($products as $product){var_dump($product['name']);
+//}
 
 require '../View/view.php';
