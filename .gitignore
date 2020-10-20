@@ -1,2 +1,4 @@
 .idea
-.map
+*.map
+.git
+.DS_Store

@@ -1,3 +1,40 @@
+# Group challenge Léa and Tessa
+Who is doing what?
+
+Dag 1: Tuesday
+- Getting the database working (import) - Léa & Tessa
+- Create config file for user and password of database
+- Create basic view to import 2 dropdown fields
+- Create product.php
+
+= index.php
+
+##Control = waiter
+--> Import Database mySQL ('require')
+--> GET/POST
+--> Methods (calculate price depending on discount)
+--> Method getProduct and getPrice
+(price calculator and optional login page)
+     
+##Model = chef
+= Group.php 
+Class Group with private properties
+
+= Product.php
+Class Product (methods getProduct + getPrices)
+
+= Customer.php
+Class Customer (methods getCustomer)
+
++ Import database PDO
+
+##View = menu
+HTML
+= homepage.php
+
+-------------------------------------------------
+
+
 # Title: PHP Price Calculator challenge
 
 - Repository: `php-pricecalculator-challenge`
