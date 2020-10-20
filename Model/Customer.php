@@ -19,4 +19,19 @@ class Customer
     }
 
 
+    public function getGroupId()
+    {
+        return $this->group_id;
+    }
+
+
+
+    public function bestdiscount($price){
+        //return name
+        //return discount
+    }
+
+
+
+
 }

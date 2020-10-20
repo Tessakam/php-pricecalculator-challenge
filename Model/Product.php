@@ -14,4 +14,29 @@ class Product
     }
 
 
+    public function getName()
+    {
+        return $this->name;
+    }
+
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    public function getNormalPrice()
+    {
+
+    }
+
+
+
+
 }
