@@ -1,14 +1,14 @@
 # Group challenge Léa and Tessa
 Who is doing what?
 
-Dag 1: Tuesday
+###Dag 1: Tuesday
 - Getting the database working (import) - Léa & Tessa
 - Create config file for user and password of database
 - Create basic view to import 2 dropdown fields
 - Create product.php
 
-= index.php
 
+= index.php
 ##Control = waiter
 --> Import Database mySQL ('require')
 --> GET/POST
