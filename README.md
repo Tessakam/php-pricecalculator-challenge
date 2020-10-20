@@ -2,8 +2,8 @@
 Who is doing what?
 
 ###Dag 1: Tuesday
-- Getting the database working (import) - Léa & Tessa
-- Create config file for user and password of database
+- Getting the database working (import) - Léa & Tessa - OK
+- Create config file for user and password of database - OK
 - Create basic view to import 2 dropdown fields
 - Create product.php
 
