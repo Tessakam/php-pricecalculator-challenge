@@ -12,6 +12,34 @@
 </head>
 <body>
 
+<section class="container">
+
+    <div class="dropdown open">
+        <button class="btn btn-secondary dropdown-toggle"
+                type="button" id="dropdownMenu4" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+            Product
+        </button>
+        <div class="dropdown-menu">
+            <span class="dropdown-item-text">Dropdown item text</span>
+            <a class="dropdown-item" href="#!">Action</a>
+        </div>
+    </div>
+
+    <div class="dropdown open">
+        <button class="btn btn-secondary dropdown-toggle"
+                type="button" id="dropdownMenu4" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+            Customer
+        </button>
+        <div class="dropdown-menu">
+            <span class="dropdown-item-text">Dropdown item text</span>
+        </div>
+    </div>
+
+
+</section>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
