@@ -13,7 +13,7 @@
 <body>
 
 <section class="container">
-
+    <form action="index.php" method="post">
     <div class="dropdown open">
         <button class="btn btn-secondary dropdown-toggle"
                 type="button" id="dropdownMenu4" data-toggle="dropdown"
@@ -40,8 +40,10 @@
                 <a class="dropdown-item" href="index.php?customerDropdown=<?php echo $customer['id'] ?>" value="<?php echo $customer['id'] ?>" name="<?php  echo $customer['id'] ?>" ><?php echo $customer['firstname']." ".$customer['lastname'] ?></a>
             <?php endforeach; ?>
         </div>
-    </div>
 
+        <p><input type="submit" class="btn btn-primary" name="submit" value="Submit"></p>
+    </div>
+    </form>
 
 </section>
 

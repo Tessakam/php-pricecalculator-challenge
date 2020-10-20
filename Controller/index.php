@@ -14,13 +14,14 @@ require '../config.php';
 
 $pdo = openConnection($dbuser,$dbpass);
 
-//$example_id=10;
-//$handle = $pdo->prepare('SELECT id, name FROM product where id = :id');
-//$handle->bindValue(':id', $example_id);
-//$handle->execute();
-//$selectedProduct = $handle->fetch();
-//
-//var_dump($selectedProduct);
+session_start();
+
+if (!isset($_SESSION["customer"])) {
+    $_SESSION["customer"] = "";
+}
+if (!isset($_SESSION["product"])) {
+    $_SESSION["product"] = "";
+}
 
 
 //_______________________ Get Products
@@ -29,20 +30,37 @@ $getProducts = $pdo->prepare("SELECT * FROM product ORDER BY id ASC");
 $getProducts->execute();
 $products = $getProducts->fetchAll();
 
+foreach ($products as $product){
+    if (isset($_GET['productDropdown']) && $_GET['productDropdown']==$product['id']){
+        $_SESSION["product"] =new product($product['name'],$product['id'],$product['price']);
+
+    }
+}
+
+
 //_______________________ Get Customers
 
 $getCustomers = $pdo->prepare("SELECT * FROM customer ORDER BY id ASC");
 $getCustomers->execute();
 $customers = $getCustomers->fetchAll();
 
-//foreach ($products as $product){var_dump($product['price']);
-//}
-foreach ($products as $product){
-    if (isset($_GET['productDropdown']) && $_GET['productDropdown']==$product['id']){
-        $productId=$product['id'];
-        echo  $productId;
-    }
+foreach ($customers as $customer){
+    if (isset($_GET['customerDropdown']) && $_GET['customerDropdown']==$customer['id']){
+        $_SESSION["customer"] =new Customer($customer['firstname'],$customer['lastname'],$customer['id'],$customer['fixed_discount'],$customer['variable_discount'],$customer['group_id']);
+
+    }}
+
+//_______________________ When submit
+
+if (isset($_POST["submit"])){
+
+    //$_SESSION["product"]->getPrice();
+
+    var_dump( $_SESSION["customer"] );
+    var_dump($_SESSION["product"]);
+
 }
+
 
 
 require '../View/view.php';

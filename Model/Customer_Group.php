@@ -2,10 +2,10 @@
 
 
 class Customer_Group
-{  ///** @var array Customer[] */
-   // private array customers;
+{
 private string $name;
-private int $fixed_discount, $variable_discount, $id;
+private int $fixed_discount, $id;
+private  $variable_discount;
 
 public function __construct($name, $fixed_discount, $variable_discount, $id)
 {
