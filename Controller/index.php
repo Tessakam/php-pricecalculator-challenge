@@ -23,11 +23,18 @@ $pdo = openConnection($dbuser,$dbpass);
 //var_dump($selectedProduct);
 
 
-$getProducts = $pdo->prepare("SELECT name FROM product ORDER BY id ASC");
+$getProducts = $pdo->prepare("SELECT * FROM product ORDER BY id ASC");
 $getProducts->execute();
 $products = $getProducts->fetchAll();
 
-//foreach ($products as $product){var_dump($product['name']);
+//foreach ($products as $product){var_dump($product['price']);
 //}
+foreach ($products as $product){
+    if (isset($_GET['productDropdown']) && $_GET['productDropdown']==$product['id']){
+        $productId=$product['id'];
+        echo  $productId;
+    }
+}
+
 
 require '../View/view.php';

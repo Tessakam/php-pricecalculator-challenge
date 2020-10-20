@@ -23,7 +23,7 @@
 
         <div class="dropdown-menu">
             <?php foreach ($products as $product): ?>
-            <a class="dropdown-item" value="" name="<?php echo $product['name'] ?>" ><?php echo $product['name'] ?></a>
+            <a class="dropdown-item" href="index.php?productDropdown=<?php echo $product['id'] ?>" value="<?php echo $product['id'] ?>" name="<?php echo $product['name'] ?>" ><?php echo $product['name'] ?></a>
             <?php endforeach; ?>
         </div>
 
