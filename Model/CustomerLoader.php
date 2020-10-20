@@ -5,34 +5,33 @@ class CustomerLoader
 {
 private Customer $customer;
 
-    public function __construct(array $customers)
+    public function __construct($customer)
     {
-        $this->customers = $customers;
+        $this->customer = $customer;
     }
 
-    function getAllmyCustomerGroup($customer){
-        //->get group ID => and then go the data base Customer group
-        //make a new customer group
-        //from it I am gonna check if there is a parent ID
-        //I am gonna loop inside until Parent ID =Null
-        //each time I will push my Group ID in my array of customer Groups
-//return depend of existence of ID parents
-        //return an array of  all id of Customer_Group which should be object Customer_Group
+    public function getAllmyCustomerGroup($pdo){
+        $groupId=$this->customer->getGroupId();
+        $handle = $pdo->prepare('SELECT parent_id FROM customer_group where id = :id');
+        $handle->bindValue(':id',  $groupId);
+        $handle->execute();
+        $test = $handle->fetchAll();
+        var_dump($test);
     }
 
-    function AddFixGroupDiscount(){
+    public function AddFixGroupDiscount(){
         //parameter is the array of Customer_Group
     }
 
-    function compareVariableGroupDiscount(){
+    public function compareVariableGroupDiscount(){
         //parameter is the array of Customer_Group
     }
 
-    function globalVariableComparaison(){ }
+    public function globalVariableComparaison(){ }
 
-    function globalFixComparaison(){ }
+    public function globalFixComparaison(){ }
 
-    function giveFinalDiscount(){ }
+    public function giveFinalDiscount(){ }
 
 
 }

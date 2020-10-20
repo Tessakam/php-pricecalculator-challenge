@@ -10,6 +10,7 @@ require '../Model/database.php';
 require '../Model/Customer.php';
 require '../Model/Product.php';
 require '../Model/Customer_Group.php';
+require '../Model/CustomerLoader.php';
 require '../config.php';
 
 $pdo = openConnection($dbuser,$dbpass);
@@ -58,6 +59,10 @@ if (isset($_POST["submit"])){
     var_dump($_SESSION["product"]);
     $price=$_SESSION["product"]->getPrice();
     echo $price;
+
+    $loader=new CustomerLoader( $_SESSION["customer"]);
+    $loader->getAllmyCustomerGroup($pdo); //need to put $pdo as a parameter if not won't work
+
 
 }
 
