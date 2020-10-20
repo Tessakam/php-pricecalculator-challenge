@@ -1,3 +1,3 @@
 <?php
 
-$pdo = openConnection();
+//$pdo = openConnection();
