@@ -54,10 +54,10 @@ foreach ($customers as $customer){
 
 if (isset($_POST["submit"])){
 
-    //$_SESSION["product"]->getPrice();
-
     var_dump( $_SESSION["customer"] );
     var_dump($_SESSION["product"]);
+    $price=$_SESSION["product"]->getPrice();
+    echo $price;
 
 }
 
