@@ -1,11 +1,15 @@
 # Group challenge Léa and Tessa
 Who is doing what?
 
-###Dag 1: Tuesday
+### Day 1: Tuesday
 - Getting the database working (import) - Léa & Tessa - OK
 - Create config file for user and password of database - OK
-- Create basic view to import 2 dropdown fields
-- Create product.php
+- Create basic view to import 2 dropdown fields - OK
+- Create product.php / customer.php / customergroup.php - OK
+
+### Day 2: Wednesday
+- Léa: CustomerLoader.php
+- Tessa: Customer.php and Customer_group.php
 
 
 = index.php
@@ -26,7 +30,7 @@ Class Product (methods getProduct + getPrices)
 = Customer.php
 Class Customer (methods getCustomer)
 
-+ Import database PDO
++ Import database PDO - OK
 
 ##View = menu
 HTML
