@@ -36,7 +36,9 @@
             Customer
         </button>
         <div class="dropdown-menu">
-            <span class="dropdown-item-text">Dropdown item text</span>
+            <?php foreach ($customers as $customer): ?>
+                <a class="dropdown-item" href="index.php?customerDropdown=<?php echo $customer['id'] ?>" value="<?php echo $customer['id'] ?>" name="<?php  echo $customer['id'] ?>" ><?php echo $customer['firstname']." ".$customer['lastname'] ?></a>
+            <?php endforeach; ?>
         </div>
     </div>
 

@@ -23,9 +23,17 @@ $pdo = openConnection($dbuser,$dbpass);
 //var_dump($selectedProduct);
 
 
+//_______________________ Get Products
+
 $getProducts = $pdo->prepare("SELECT * FROM product ORDER BY id ASC");
 $getProducts->execute();
 $products = $getProducts->fetchAll();
+
+//_______________________ Get Customers
+
+$getCustomers = $pdo->prepare("SELECT * FROM customer ORDER BY id ASC");
+$getCustomers->execute();
+$customers = $getCustomers->fetchAll();
 
 //foreach ($products as $product){var_dump($product['price']);
 //}
