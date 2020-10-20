@@ -8,7 +8,8 @@ error_reporting(E_ALL);
 
 require '../Model/database.php';
 
-//$pdo = openConnection();
+require '../config.php';
+$pdo = openConnection($dbuser,$dbpass);
 
 
 
