@@ -76,12 +76,45 @@ class CustomerLoader
        else {return $bestDiscount =FLOOR($variableGroupDiscount).'%';}
     }
 
-    public function globalFixComparaison()
-    {
+    public function getFinalVariableDiscount($finalGroupDiscount,$VariableGroupDiscount){
+        if($this->customer->getVariableDiscount()!=null && is_numeric($finalGroupDiscount)==false){
+            if ($this->customer->getVariableDiscount()<$VariableGroupDiscount){
+                $finalVariableDiscount=$VariableGroupDiscount;
+            }
+            else  $finalVariableDiscount=$this->customer->getVariableDiscount();
+        }
+        elseif($this->customer->getVariableDiscount()==null && is_numeric($finalGroupDiscount)==false){
+            $finalVariableDiscount=$VariableGroupDiscount;
+        }
+        elseif($this->customer->getVariableDiscount()!=null && is_numeric($finalGroupDiscount)==true){
+            $finalVariableDiscount=$this->getVariableDiscount();
+        }
+        else{$finalVariableDiscount=0;}
+
+        return $finalVariableDiscount;
     }
 
-    public function giveFinalDiscount()
+    public function getFinalFixedDiscount($finalGroupDiscount){
+        if ($this->customer->getFixedDiscount() != null && is_numeric($finalGroupDiscount) == true) {
+            $finalFixedDiscount = $this->customer->getFixedDiscount() + $finalGroupDiscount;
+        } elseif ($this->customer->getFixedDiscount() != null && is_numeric($finalGroupDiscount) == false) {
+            $finalFixedDiscount = $this->customer->getFixedDiscount();
+        } elseif ($this->customer->getFixedDiscount() == null && is_numeric($finalGroupDiscount) == true) {
+            $finalFixedDiscount = $finalGroupDiscount;
+        } else {
+            $finalFixedDiscount = 0;
+        }
+        return $finalFixedDiscount;
+    }
+
+    public function giveFinalPrice($normalPrice,$finalFixedDiscount ,$finalVariableDiscount)
     {
+        $finalPrice = $normalPrice - $finalFixedDiscount - ($normalPrice - $finalFixedDiscount) * $finalVariableDiscount / 100;
+        if ($finalPrice <= 0) {
+            $finalPrice = 0;
+            //$message = "Congratulation, you have enough points on your card, you get a free product !";
+        }
+        return number_format((float)$finalPrice, 2, '.', '').'€';
     }
 
 
