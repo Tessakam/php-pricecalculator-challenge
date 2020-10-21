@@ -7,9 +7,8 @@ error_reporting(E_ALL);
 
 class Customer_Group
 {
-    private string $name;
-    private int $fixed_discount, $id, $parent_id;
-    private $variable_discount;
+    private string $name,$id;
+    private $variable_discount, $fixed_discount, $parent_id;
 
     public function __construct($id, $pdo)
     {
