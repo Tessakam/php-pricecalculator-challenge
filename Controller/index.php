@@ -68,20 +68,6 @@ if (isset($_POST["submit"])) {
 
     $FixedGroupDiscount = $loader->AddFixGroupDiscount($customerGroup);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-}
-
-
-
-
-=======
-var_dump($finalFixedDiscount);
-var_dump($_SESSION["product"]);
-$finalPrice=$normalPrice-$finalFixedDiscount-($normalPrice-$finalFixedDiscount)*$finalVariableDiscount/100;
-if($finalPrice<=0){$finalPrice=0; $message="Congratulation, you have enough points on your card, you get a free product !";}
-echo $finalPrice;
-=======
     $finalGroupDiscount = $loader->groupDiscountcomparaison($normalPrice, $FixedGroupDiscount, $VariableGroupDiscount);
 
     // --------------------get Final Variable Discount
@@ -95,12 +81,10 @@ echo $finalPrice;
     $finalPrice=$loader->giveFinalPrice($normalPrice, $finalFixedDiscount,$finalVariableDiscount);
 
 
-var_dump( $_SESSION["product"]);
+    var_dump( $_SESSION["product"]);
     echo $finalPrice;
->>>>>>> 62530126078159a0bd556f88ae15eb1497963e3f
 
 }
 
 
->>>>>>> 30352061ff33c526e21e28af49edcc32c2018ddc
 require '../View/view.php';
