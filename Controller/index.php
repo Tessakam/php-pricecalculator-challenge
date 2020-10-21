@@ -53,15 +53,24 @@ foreach ($customers as $customer){
 
 //_______________________ When submit
 
+
 if (isset($_POST["submit"])){
 
     var_dump( $_SESSION["customer"] );
-    var_dump($_SESSION["product"]);
+    //var_dump($_SESSION["product"]);
     $price=$_SESSION["product"]->getPrice();
-    echo $price;
+    //echo $price;
 
     $loader=new CustomerLoader( $_SESSION["customer"]);
-    $loader->getAllmyCustomerGroup($pdo); //need to put $pdo as a parameter if not won't work
+    //from here modifications
+    $customerGroup=$loader->getAllmyCustomerGroup($pdo); //need to put $pdo as a parameter if not won't work
+    // now we have all the Customer_group of our customer, need to compare them
+    // ->getHighestVariableDiscount from the array $ customerGroup
+    // -> make an addition of the fixDiscount if not null
+    //Compare with the customer->getFixedDiscount() , and customer ->getVariableDiscount()
+    //Get the final price
+    var_dump($customerGroup);
+
 
 
 }

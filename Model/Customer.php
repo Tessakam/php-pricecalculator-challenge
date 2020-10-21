@@ -7,9 +7,8 @@ error_reporting(E_ALL);
 
 class Customer
 {
-    private string $firstname, $lastname;
-    private int $id, $fixed_discount;
-    private $variable_discount;
+    private string $id, $firstname, $lastname;
+    private $variable_discount, $fixed_discount;
     private $group_id;
 
     public function __construct($firstname, $lastname, $id, $fixed_discount, $variable_discount, $group_id)
