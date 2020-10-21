@@ -1,19 +1,29 @@
 <?php
 
+declare(strict_types=1);
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
 class Customer_Group
 {
-private string $name;
-private int $fixed_discount, $id, $parent_id;
-private  $variable_discount;
+    private string $name;
+    private int $fixed_discount, $id, $parent_id;
+    private $variable_discount;
 
-public function __construct($name, $fixed_discount, $variable_discount, $id, $gitid)
-{
-    $this->name = $name;
-    $this->fixed_discount = $fixed_discount;
-    $this->variable_discount = $variable_discount;
-    $this->id = $id;
-}
+    public function __construct($id, $pdo)
+    {
+        $handle = $pdo->prepare('SELECT * FROM customer_group where id = :id');
+        $handle->bindValue(':id', $id);
+        $handle->execute();
+        $result = $handle->fetchAll();
+
+        $this->name = $result[0]['name'];
+        $this->fixed_discount = $result[0]['fixed_discount'];
+        $this->variable_discount = $result[0]['variable_discount'];
+        $this->id = $id;
+        $this->parent_id = $result[0]['parent_id'];
+    }
 
     public function getParentId()
     {
@@ -21,15 +31,15 @@ public function __construct($name, $fixed_discount, $variable_discount, $id, $gi
     }
 
 
-    public function get_group_variable_discount (){
-
+    public function getFixedDiscount()
+    {
+        return $this->fixed_discount;
     }
 
-    public function get_group_fixed_discount (){
 
+    public function getVariableDiscount()
+    {
+        return $this->variable_discount;
     }
-    
-    
-    
 
 }
