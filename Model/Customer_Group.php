@@ -7,7 +7,7 @@ private string $name;
 private int $fixed_discount, $id, $parent_id;
 private  $variable_discount;
 
-public function __construct($name, $fixed_discount, $variable_discount, $id, $parent_id)
+public function __construct($name, $fixed_discount, $variable_discount, $id, $gitid)
 {
     $this->name = $name;
     $this->fixed_discount = $fixed_discount;
