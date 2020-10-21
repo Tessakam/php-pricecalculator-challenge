@@ -63,8 +63,8 @@ if (isset($_POST["submit"])){
     $loader=new CustomerLoader( $_SESSION["customer"]);
     $loader->getAllmyCustomerGroup($pdo); //need to put $pdo as a parameter if not won't work
 
-
 }
+
 
 
 
