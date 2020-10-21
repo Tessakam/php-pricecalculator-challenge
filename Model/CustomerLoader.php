@@ -32,31 +32,48 @@ class CustomerLoader
 
     }
 
-    public function AddFixGroupDiscount()
+    public function AddFixGroupDiscount($customerGroup)
     {
-        //public function get_group_fixed_discount()
-        //    {
-        //        $group_id = $this->group_id;
-        //        $sumFixedDiscount = $group_id->getFixedDiscount();
-        //
-        //        //loop
-        //        while($group_id->getGroupId() !== null){
-        //            $fixDiscountGroup = $group_id->getGroupId()->getFixedDiscount();
-        //            $sumFixedDiscount += $fixDiscountGroup;
-        //            $group_id = $group_id->getGroupId();
-        //        }
-        //        return $sumFixedDiscount;
-        //    }
-        //parameter is the array of Customer_Group
+        $sumFixedDiscount = 0;
+        foreach ($customerGroup as $objectGroup) {
+            $fixedDiscount = $objectGroup->getFixedDiscount();
+
+            if ($fixedDiscount != null) {
+                $sumFixedDiscount += intval($fixedDiscount);
+            }
+        }
+        return $sumFixedDiscount;
+    }
+    public function compareVariableGroupDiscount($customerGroup )
+    {
+        $arrayVariableDiscount=array();
+        foreach ($customerGroup as $objectGroup){
+            $variableDiscount=$objectGroup->getVariableDiscount();
+            if ($variableDiscount != null){array_push($arrayVariableDiscount,intval($variableDiscount));}
+
+        }
+        var_dump( $arrayVariableDiscount);
+        if(count($arrayVariableDiscount)>1){
+            $discount= max($arrayVariableDiscount);
+        }
+        elseif(!empty($arrayVariableDiscount)){
+            $discount=intval(array_values($arrayVariableDiscount));
+        }
+        else{$discount=0;}
+        return $discount;
+
     }
 
-    public function compareVariableGroupDiscount()
+    public function groupDiscountcomparaison ($normalPrice,$fixedGroupDiscount,$variableGroupDiscount)
     {
-        //parameter is the array of Customer_Group
-    }
+        $priceFixedDiscount= $normalPrice-$fixedGroupDiscount;
 
-    public function globalVariableComparaison()
-    {
+        if($variableGroupDiscount!=0){$priceVariableDiscount=$normalPrice-($normalPrice*$variableGroupDiscount)/100;}
+        else{$priceVariableDiscount=$normalPrice;}
+     if ($priceFixedDiscount<$priceVariableDiscount){
+         return $bestDiscount = $fixedGroupDiscount;
+     }
+       else {return $bestDiscount =FLOOR($variableGroupDiscount).'%';}
     }
 
     public function globalFixComparaison()

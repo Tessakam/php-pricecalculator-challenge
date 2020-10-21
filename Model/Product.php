@@ -33,7 +33,7 @@ class Product
 
     public function getNormalPrice()
     {
-
+        return $this->price/100;
     }
 
 

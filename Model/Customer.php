@@ -16,7 +16,7 @@ class Customer
         $this->firstname = $firstname;
         $this->lastname = $lastname;
         $this->id = $id;
-        $this->fixed_discount = $fixed_discount * 100;
+        $this->fixed_discount = $fixed_discount;
         $this->variable_discount = $variable_discount;
         $this->group_id = $group_id;
     }
