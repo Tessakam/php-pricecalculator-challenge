@@ -57,32 +57,84 @@ foreach ($customers as $customer) {
 
 if (isset($_POST["submit"])) {
 
-    var_dump($_SESSION["customer"]);
     $price = $_SESSION["product"]->getPrice();
     $normalPrice = $_SESSION["product"]->getNormalPrice();
 
     $loader = new CustomerLoader($_SESSION["customer"]);
     $customerGroup = $loader->getAllmyCustomerGroup($pdo);
 
-    $VariableGroupDiscount = $loader->compareVariableGroupDiscount($customerGroup);
+    // --------------------get Best Group Variable Discount
 
-    $FixedGroupDiscount = $loader->AddFixGroupDiscount($customerGroup);
+    $VariableGroup = $loader->compareVariableGroupDiscount($customerGroup);
+    $VariableGroupDiscount = $VariableGroup['discount'];
+    $VariableGroupName = $VariableGroup['name'];
+
+    // --------------------get Best Fixed Variable Discount
+
+    $FixedGroup = $loader->AddFixGroupDiscount($customerGroup);
+    $FixedGroupDiscount = $FixedGroup['total'];
+
+    $messageFixedGroupDiscount = '';
+    if (empty($FixedGroup['details'])) {
+        $messageFixedGroupDiscount = 'You get no fixed Discount from your Customer Groups.';
+    } elseif (count($FixedGroup['details']) == 1) {
+        $messageFixedGroupDiscount = 'You get ' . $FixedGroup['details'][0]['discount'] . '€ discount, because you are part of : ' . $FixedGroup['details'][0]['name'] . '.';
+    } else {
+        foreach ($FixedGroup['details'] as $array) {
+            $messageFixedGroupDiscount .= 'As a member of ' . $array['name'] . ' , you get ' . $array['discount'] . ' € of discount.<br>';
+        }
+        $messageFixedGroupDiscount .= ' In total you get ' . $FixedGroupDiscount . ' € of discount from your customer groups.';
+    }
+
+// --------------------get Final Group discount and message
+
 
     $finalGroupDiscount = $loader->groupDiscountcomparaison($normalPrice, $FixedGroupDiscount, $VariableGroupDiscount);
 
-    // --------------------get Final Variable Discount
+    if (is_numeric($finalGroupDiscount) == false) {
+        $finalGroupMessage = 'As a member of ' . $VariableGroupName . ' , you get ' . $VariableGroupDiscount . '% discount.';
+    } else {
+        $finalGroupMessage = $messageFixedGroupDiscount;
+    }
+
+    // --------------------get Final Variable Discount + message
+
+    // Variable value :
     $finalVariableDiscount = $loader->getFinalVariableDiscount($finalGroupDiscount, $VariableGroupDiscount);
 
-    // --------------------get Final Fixed Discount
-    $finalFixedDiscount=$loader->getFinalFixedDiscount($finalGroupDiscount);
+    // Message for variable :
+    if ($finalVariableDiscount == 0 || $finalVariableDiscount == null) {
+        $finalVariableMessage = "You don't have any variable discount.";
+    } elseif ($finalVariableDiscount == $VariableGroupDiscount) {
+        $finalVariableMessage = $finalGroupMessage;
+    } else {
+        $finalVariableMessage = 'You get ' . $_SESSION["customer"]->getVariableDiscount() . ' % discount from your customer advantages.';
+    }
 
-    // --------------------get Final Price
-
-    $finalPrice=$loader->giveFinalPrice($normalPrice, $finalFixedDiscount,$finalVariableDiscount);
 
 
-    var_dump( $_SESSION["product"]);
-    echo $finalPrice;
+    // --------------------get Final Fixed Discount + message
+
+    // Fixed value :
+
+    $finalFixedDiscount = $loader->getFinalFixedDiscount($finalGroupDiscount);
+
+    // Fixed message :
+
+    $finalFixedMessage="";
+    if($FixedGroupDiscount == $finalGroupDiscount && $_SESSION["customer"]->getFixedDiscount()!=null ){
+        $finalFixedMessage=$finalGroupMessage. '<br>From your customer advantages you benefit from '. $_SESSION["customer"]->getFixedDiscount().'€ discount.';
+    }
+    elseif ($_SESSION["customer"]->getFixedDiscount()!=null){  $finalFixedMessage='From your customer advantages you benefit from '. $_SESSION["customer"]->getFixedDiscount().'€ discount.'; }
+
+
+    // --------------------get Final Price + message
+
+    $finalPrice = $loader->giveFinalPrice($normalPrice, $finalFixedDiscount, $finalVariableDiscount);
+
+    $finalMessage= $finalVariableMessage.'<br>'.$finalFixedMessage.'<br>The final price is '.$finalPrice.' .';
+
+    echo  $finalMessage;
 
 }
 

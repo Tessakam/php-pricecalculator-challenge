@@ -34,33 +34,48 @@ class CustomerLoader
 
     public function AddFixGroupDiscount($customerGroup)
     {
+        $arrayFixedDiscount=array();
         $sumFixedDiscount = 0;
+
         foreach ($customerGroup as $objectGroup) {
             $fixedDiscount = $objectGroup->getFixedDiscount();
-
+            $groupName=$objectGroup->getName();
             if ($fixedDiscount != null) {
+                $arrayDiscount=array('name'=>$groupName, 'discount'=>$fixedDiscount);
+                array_push($arrayFixedDiscount,$arrayDiscount);
                 $sumFixedDiscount += intval($fixedDiscount);
             }
-        }
-        return $sumFixedDiscount;
+            }
+        $allFixedInfo=array('details'=>$arrayFixedDiscount, 'total'=>$sumFixedDiscount);
+        return($allFixedInfo);
     }
+
     public function compareVariableGroupDiscount($customerGroup )
     {
         $arrayVariableDiscount=array();
-        foreach ($customerGroup as $objectGroup){
-            $variableDiscount=$objectGroup->getVariableDiscount();
-            if ($variableDiscount != null){array_push($arrayVariableDiscount,intval($variableDiscount));}
 
+        foreach ($customerGroup as $objectGroup){
+
+            $variableDiscount=intval($objectGroup->getVariableDiscount());
+            $variableName=$objectGroup->getName();
+            if ($variableDiscount != null){
+                $arrayDiscount=array('name'=>$variableName, 'discount'=>$variableDiscount);
+                array_push($arrayVariableDiscount,$arrayDiscount);}
         }
-        var_dump( $arrayVariableDiscount);
+
         if(count($arrayVariableDiscount)>1){
-            $discount= max($arrayVariableDiscount);
-        }
-        elseif(!empty($arrayVariableDiscount)){
-            $discount=intval(array_values($arrayVariableDiscount));
-        }
-        else{$discount=0;}
-        return $discount;
+            $arrayDiscount=$arrayVariableDiscount[0];
+            foreach ($arrayVariableDiscount as $objectDiscount){
+if($objectDiscount['discount']>$arrayDiscount['discount'])
+{$arrayDiscount=$objectDiscount;}
+            }
+       }
+   elseif(!empty($arrayVariableDiscount)){
+       $arrayDiscount=$arrayDiscount=$arrayVariableDiscount[0];
+     }
+      else{$arrayDiscount=array('name'=>'No variable Discount', 'discount'=>0);}
+
+   return $arrayDiscount;
 
     }
 
@@ -87,7 +102,7 @@ class CustomerLoader
             $finalVariableDiscount=$VariableGroupDiscount;
         }
         elseif($this->customer->getVariableDiscount()!=null && is_numeric($finalGroupDiscount)==true){
-            $finalVariableDiscount=$this->getVariableDiscount();
+            $finalVariableDiscount=$this->customer->getVariableDiscount();
         }
         else{$finalVariableDiscount=0;}
 
@@ -106,6 +121,7 @@ class CustomerLoader
         }
         return $finalFixedDiscount;
     }
+
 
     public function giveFinalPrice($normalPrice,$finalFixedDiscount ,$finalVariableDiscount)
     {

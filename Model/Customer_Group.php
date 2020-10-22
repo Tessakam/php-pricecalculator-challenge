@@ -41,4 +41,17 @@ class Customer_Group
         return $this->variable_discount;
     }
 
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
 }
