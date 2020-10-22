@@ -1,38 +1,49 @@
-<?php require '../includes/header.php'?>
+<?php require '../View/includes/header.php' ?>
 <!-- this is the view, try to put only simple if's and loops here.
 Anything complex should be calculated in the model -->
 
 <section class="container">
     <form action="index.php" method="post">
-    <div class="dropdown open">
-        <button class="btn btn-secondary dropdown-toggle"
-                type="button" id="dropdownMenu4" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-            Product
-        </button>
 
-        <div class="dropdown-menu">
-            <?php foreach ($products as $product): ?>
-            <a class="dropdown-item" href="index.php?productDropdown=<?php echo $product['id'] ?>" value="<?php echo $product['id'] ?>" name="<?php echo $product['name'] ?>" ><?php echo $product['name'] ?></a>
-            <?php endforeach; ?>
+        <br>
+        <H2>Price calculator</H2>
+        <br>
+
+        <div class="btn-group dropright">
+
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Choose your product
+            </button>
+
+            <div class="dropdown-menu">
+                <?php foreach ($products as $product): ?>
+                    <a class="dropdown-item" href="index.php?productDropdown=<?php echo $product['id'] ?>"
+                       value="<?php echo $product['id'] ?>"
+                       name="<?php echo $product['name'] ?>"><?php echo $product['name'] ?></a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <br>
+        <div class="btn group dropright">
+
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Choose your customer
+            </button>
+
+            <div class="dropdown-menu">
+                <?php foreach ($customers as $customer): ?>
+                    <a class="dropdown-item" href="index.php?customerDropdown=<?php echo $customer['id'] ?>"
+                       value="<?php echo $customer['id'] ?>"
+                       name="<?php echo $customer['id'] ?>"><?php echo $customer['firstname'] . " " . $customer['lastname'] ?></a>
+                <?php endforeach; ?>
+            </div>
         </div>
 
-    </div>
+        <br>
 
-    <div class="dropdown open">
-        <button class="btn btn-secondary dropdown-toggle"
-                type="button" id="dropdownMenu4" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-            Customer
-        </button>
-        <div class="dropdown-menu">
-            <?php foreach ($customers as $customer): ?>
-                <a class="dropdown-item" href="index.php?customerDropdown=<?php echo $customer['id'] ?>" value="<?php echo $customer['id'] ?>" name="<?php  echo $customer['id'] ?>" ><?php echo $customer['firstname']." ".$customer['lastname'] ?></a>
-            <?php endforeach; ?>
+        <div>
+            <p><input type="submit" class="btn btn-primary" name="submit" value="Submit"></p>
         </div>
-
-        <p><input type="submit" class="btn btn-primary" name="submit" value="Submit"></p>
-    </div>
     </form>
 
 </section>
@@ -50,7 +61,7 @@ Anything complex should be calculated in the model -->
         crossorigin="anonymous"></script>
 </body>
 
-<?php require '../includes/footer.php'?>
+<?php require '../View/includes/footer.php' ?>
 
 </html>
 

@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Pimp it -->
-    <link rel="stylesheet" type="text/css" href="../includes/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="../View/includes/stylesheet.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
