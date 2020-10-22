@@ -11,33 +11,15 @@ Who is doing what?
 - Léa: CustomerLoader.php
 - Tessa: Customer.php and Customer_group.php
 
+### Day 3: Thursday
+- Léa: calculating the discount and prices
+- Tessa: worked on view's menu
+- Together: updating files from procedural to MVC
 
-= index.php
-##Control = waiter
---> Import Database mySQL ('require')
---> GET/POST
---> Methods (calculate price depending on discount)
---> Method getProduct and getPrice
-(price calculator and optional login page)
-     
-##Model = chef
-= Group.php 
-Class Group with private properties
-
-= Product.php
-Class Product (methods getProduct + getPrices)
-
-= Customer.php
-Class Customer (methods getCustomer)
-
-+ Import database PDO - OK
-
-##View = menu
-HTML
-= homepage.php
+### Day 4: Friday
+...
 
 -------------------------------------------------
-
 
 # Title: PHP Price Calculator challenge
 
