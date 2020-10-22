@@ -4,47 +4,63 @@ Anything complex should be calculated in the model -->
 
 <section class="container">
     <form action="index.php" method="post">
-
         <br>
         <H2>Price calculator</H2>
         <br>
 
-        <div class="btn-group dropright">
+        <div class="row">
+            <div class="btn-group dropright">
 
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Choose your product
-            </button>
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" class="dropdown-toggle" href="#">
+                    <span id="selected">Choose your product</span> <span class="caret"></span>
+                </button>
 
-            <div class="dropdown-menu">
-                <?php foreach ($products as $product): ?>
-                    <a class="dropdown-item" href="index.php?productDropdown=<?php echo $product['id'] ?>"
-                       value="<?php echo $product['id'] ?>"
-                       name="<?php echo $product['name'] ?>"><?php echo $product['name'] ?></a>
-                <?php endforeach; ?>
+                     <ul class="dropdown-menu scrollable-menu" role="menu">
+                    <?php foreach ($products as $product): ?>
+                        <li><a class="dropdown-item" href="index.php?productDropdown=<?php echo $product['id'] ?>"
+                               value="<?php echo $product['id'] ?>"
+                               name="<?php echo $product['name'] ?>"><?php echo $product['name'] ?></a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="btn group dropright">
+
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    Choose your customer
+                </button>
+
+                <ul class="dropdown-menu scrollable-menu" role="menu">
+                    <?php foreach ($customers as $customer): ?>
+                        <li><a class="dropdown-item" href="index.php?customerDropdown=<?php echo $customer['id'] ?>"
+                               value="<?php echo $customer['id'] ?>"
+                               name="<?php echo $customer['id'] ?>"><?php echo $customer['firstname'] . " " . $customer['lastname'] ?></a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
             </div>
         </div>
         <br>
-        <div class="btn group dropright">
-
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Choose your customer
-            </button>
-
-            <div class="dropdown-menu">
-                <?php foreach ($customers as $customer): ?>
-                    <a class="dropdown-item" href="index.php?customerDropdown=<?php echo $customer['id'] ?>"
-                       value="<?php echo $customer['id'] ?>"
-                       name="<?php echo $customer['id'] ?>"><?php echo $customer['firstname'] . " " . $customer['lastname'] ?></a>
-                <?php endforeach; ?>
-            </div>
-        </div>
-
-        <br>
-
         <div>
             <p><input type="submit" class="btn btn-primary" name="submit" value="Submit"></p>
         </div>
+
+        <br>
+        <p>Your product: <strong><?php echo ucfirst($_SESSION["product"]->getName()); ?></strong></p>
+        <p>Your customer: <strong><?php echo $_SESSION["customer"]->getFirstname()." ". $_SESSION["customer"]->getLastname(); ?></strong></p>
+
+        <p>Initial price: </p>
+        <p>Final price: </p>
+        <br>
     </form>
+
+
 
 </section>
 

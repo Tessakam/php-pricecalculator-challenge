@@ -27,12 +27,29 @@ p {
     text-align: left;
     font-family: Arial, Helvetica, sans-serif;}
 
-footer{
+.btn-group {
+    margin-left: 13px;
+}
+
+footer {
     text-align: left;
     padding: 10px;
     font-size: 10px;
 }
 
-.btn-group{
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
 
+@media only screen and (max-width: 375px) {
+    body {
+
+        background-attachment: fixed;
+        background-image: none;
+    }
+    H2 {
+        font-size: 12px;
+    }
 }
