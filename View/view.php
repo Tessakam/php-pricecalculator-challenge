@@ -1,4 +1,4 @@
-<?php require '../View/includes/header.php' ?>
+<?php require 'includes/header.php' ?>
 <!-- this is the view, try to put only simple if's and loops here.
 Anything complex should be calculated in the model -->
 
@@ -16,11 +16,11 @@ Anything complex should be calculated in the model -->
                     <span id="selected">Choose your product</span> <span class="caret"></span>
                 </button>
 
-                     <ul class="dropdown-menu scrollable-menu" role="menu">
-                    <?php foreach ($products as $product): ?>
-                        <li><a class="dropdown-item" href="index.php?productDropdown=<?php echo $product['id'] ?>"
-                               value="<?php echo $product['id'] ?>"
-                               name="<?php echo $product['name'] ?>"><?php echo $product['name'] ?></a>
+                <ul class="dropdown-menu scrollable-menu" role="menu">
+                    <?php foreach ($products->getProducts() as $product): ?>
+                        <li><a class="dropdown-item" href="index.php?productDropdown=<?php echo $product->getId() ?>"
+                               value="<?php echo $product->getId() ?>"
+                               name="<?php echo $product->getName(); ?>"><?php echo $product->getName() ?></a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -37,10 +37,11 @@ Anything complex should be calculated in the model -->
                 </button>
 
                 <ul class="dropdown-menu scrollable-menu" role="menu">
-                    <?php foreach ($customers as $customer): ?>
-                        <li><a class="dropdown-item" href="index.php?customerDropdown=<?php echo $customer['id'] ?>"
-                               value="<?php echo $customer['id'] ?>"
-                               name="<?php echo $customer['id'] ?>"><?php echo $customer['firstname'] . " " . $customer['lastname'] ?></a>
+
+                    <?php foreach ($customers->getCustomers() as $customer): ?>
+                        <li><a class="dropdown-item" href="index.php?customerDropdown=<?php echo $customer->getId() ?>"
+                               value="<?php echo $customer->getId() ?>"
+                               name="<?php echo $customer->getFirstname(); ?>"><?php echo $customer->getFirstname().' '.$customer->getLastname() ?></a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -53,13 +54,15 @@ Anything complex should be calculated in the model -->
 
         <br>
         <p>Your product: <strong><?php echo ucfirst($_SESSION["product"]->getName()); ?></strong></p>
-        <p>Your customer: <strong><?php echo $_SESSION["customer"]->getFirstname()." ". $_SESSION["customer"]->getLastname(); ?></strong></p>
+        <p>Your customer:
+            <strong><?php echo $_SESSION["customer"]->getFirstname() . " " . $_SESSION["customer"]->getLastname(); ?></strong>
+        </p>
 
-        <p>Initial price: </p>
-        <p>Final price: </p>
+        <p>Initial price:<?php  if(isset($normalPrice)){echo $normalPrice.' €' ;} ?> </p>
+        <p><?php  if(isset($finalMessage)){echo $finalMessage ;} ?> </p>
+        <p>Final price:<?php  if(isset($finalPrice)){echo $finalPrice ;} ?></p>
         <br>
     </form>
-
 
 
 </section>
@@ -77,7 +80,7 @@ Anything complex should be calculated in the model -->
         crossorigin="anonymous"></script>
 </body>
 
-<?php require '../View/includes/footer.php' ?>
+<?php require 'includes/footer.php' ?>
 
 </html>
 
