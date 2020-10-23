@@ -15,8 +15,15 @@ require 'Model/Customer_Group.php';
 require 'Model/CustomerLoader.php';
 //include all your controller files here
 require 'Controller/Homepage.php';
+require  'Controller/LoginController.php';
 
 $controller = new HomepageController();
+
+//$controller =new LoginController();
+//if(isset($_SESSION['valid']) && $_SESSION['valid'] === true) {
+//  $controller = new HomepageController();
+//}
+
 
 // Loads the view - Allows templating and then sending an array of data into the view.
 $controller->render($_GET, $_POST);
