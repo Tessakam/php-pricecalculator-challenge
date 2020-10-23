@@ -53,9 +53,9 @@ Anything complex should be calculated in the model -->
         </div>
 
         <br>
-        <p>Your product: <strong><?php echo ucfirst($_SESSION["product"]->getName()); ?></strong></p>
+        <p>Your product: <strong><?php if(!empty($_SESSION["product"])){ echo ucfirst($_SESSION["product"]->getName());} ?></strong></p>
         <p>Your customer:
-            <strong><?php echo $_SESSION["customer"]->getFirstname() . " " . $_SESSION["customer"]->getLastname(); ?></strong>
+            <strong><?php if(!empty($_SESSION["customer"])){echo $_SESSION["customer"]->getFirstname() . " " . $_SESSION["customer"]->getLastname();} ?></strong>
         </p>
 
         <p>Initial price:<?php  if(isset($normalPrice)){echo $normalPrice.' €' ;} ?> </p>
