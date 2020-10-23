@@ -23,7 +23,4 @@ class Customers
         return $this->customers;
     }
 
-
-
-
 }

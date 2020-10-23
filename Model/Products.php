@@ -3,6 +3,7 @@
 
 class Products
 {
+/** @var array Product[] */
     private array $products;
 
     public function __construct($pdo)
@@ -22,9 +23,6 @@ class Products
     {
         return $this->products;
     }
-
-
-
 }
 
 

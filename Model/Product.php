@@ -35,8 +35,4 @@ class Product
     {
         return $this->price/100;
     }
-
-
-
-
 }

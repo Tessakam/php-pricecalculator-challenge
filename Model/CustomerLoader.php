@@ -10,6 +10,7 @@ class CustomerLoader
         $this->customer = $customer;
     }
 
+    // Get all information from database Customer Group for specific customer
     public function getAllmyCustomerGroup($pdo)
     {
         $customerGroupId = array();
@@ -32,6 +33,7 @@ class CustomerLoader
 
     }
 
+    // Get all fixed discounts from the customer group
     public function AddFixGroupDiscount($customerGroup)
     {
         $arrayFixedDiscount=array();
@@ -46,6 +48,7 @@ class CustomerLoader
                 $sumFixedDiscount += intval($fixedDiscount);
             }
             }
+        // combines the discount of different groups (example 5euro of marketing and 2euro of becode)
         $allFixedInfo=array('details'=>$arrayFixedDiscount, 'total'=>$sumFixedDiscount);
         return($allFixedInfo);
     }
@@ -63,6 +66,7 @@ class CustomerLoader
                 array_push($arrayVariableDiscount,$arrayDiscount);}
         }
 
+        // looping to get the highest discount
         if(count($arrayVariableDiscount)>1){
             $arrayDiscount=$arrayVariableDiscount[0];
             foreach ($arrayVariableDiscount as $objectDiscount){
@@ -91,6 +95,7 @@ if($objectDiscount['discount']>$arrayDiscount['discount'])
        else {return $bestDiscount =FLOOR($variableGroupDiscount).'%';}
     }
 
+    //false = percentage and true = fixed discount
     public function getFinalVariableDiscount($finalGroupDiscount,$VariableGroupDiscount){
         if($this->customer->getVariableDiscount()!=null && is_numeric($finalGroupDiscount)==false){
             if ($this->customer->getVariableDiscount()<$VariableGroupDiscount){

@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-
-
 class HomepageController
 {
     public function render(array $GET, array $POST)
     {
+        //user and password of database
         require 'config.php';
         $pdo = openConnection($dbuser, $dbpass);
         session_start();
@@ -18,17 +17,17 @@ class HomepageController
         if (!isset($_SESSION["product"])) {
             $_SESSION["product"] = "";
         }
-        $products = new Products($pdo);
 
         //_______________________ Get Products
+        $products = new Products($pdo);
 
         foreach ($products->getProducts() as $product) {
             if (isset($_GET['productDropdown']) && $_GET['productDropdown'] == $product->getId()) {
                 $_SESSION["product"] = $product;
             }
         }
-//_______________________ Get Customers
-        $customers= new Customers($pdo);
+        //_______________________ Get Customers
+        $customers = new Customers($pdo);
 
         foreach ($customers->getCustomers() as $customer) {
             if (isset($_GET['customerDropdown']) && $_GET['customerDropdown'] == $customer->getId()) {
@@ -38,6 +37,7 @@ class HomepageController
 
         if (isset($_POST["submit"])) {
 
+            //normal price = amount in EUR
             $normalPrice = $_SESSION["product"]->getNormalPrice();
 
             $loader = new CustomerLoader($_SESSION["customer"]);
@@ -65,8 +65,8 @@ class HomepageController
                 }
                 $messageFixedGroupDiscount .= ' In total you get ' . $FixedGroupDiscount . ' € of discount from your customer groups.';
             }
-// --------------------get Final Group discount and message
 
+            // --------------------get Final Group discount and message
 
             $finalGroupDiscount = $loader->groupDiscountcomparaison($normalPrice, $FixedGroupDiscount, $VariableGroupDiscount);
 
@@ -90,15 +90,12 @@ class HomepageController
                 $finalVariableMessage = 'You get ' . $_SESSION["customer"]->getVariableDiscount() . ' % discount from your customer advantages.';
             }
 
-
             // --------------------get Final Fixed Discount + message
 
             // Fixed value :
-
             $finalFixedDiscount = $loader->getFinalFixedDiscount($finalGroupDiscount);
 
             // Fixed message :
-
             $finalFixedMessage = "";
             if ($FixedGroupDiscount == $finalGroupDiscount && $_SESSION["customer"]->getFixedDiscount() != null) {
                 $finalFixedMessage = $finalGroupMessage . '<br>From your customer advantages you benefit from ' . $_SESSION["customer"]->getFixedDiscount() . '€ discount.';
@@ -106,20 +103,12 @@ class HomepageController
                 $finalFixedMessage = 'From your customer advantages you benefit from ' . $_SESSION["customer"]->getFixedDiscount() . '€ discount.';
             }
 
-
             // --------------------get Final Price + message
 
             $finalPrice = $loader->giveFinalPrice($normalPrice, $finalFixedDiscount, $finalVariableDiscount);
 
-            $finalMessage = $finalVariableMessage . '<br>' . $finalFixedMessage ;
-
-
-
-        }
-
+            $finalMessage = $finalVariableMessage . '<br>' . $finalFixedMessage;
+       }
         require 'View/view.php';
-
     }
-
-
 }

@@ -19,6 +19,9 @@ Who is doing what?
 ### Day 4: Friday
 ...
 
+### Comments
+- Login and password of database are stored in config. To initiate the code, replace by your own details.
+- Import.sql by creating a database first and then add import file via terminal 
 -------------------------------------------------
 
 # Title: PHP Price Calculator challenge
