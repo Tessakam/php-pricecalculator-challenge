@@ -2,7 +2,7 @@
 
 
 class Customers
-{
+{ /** @var array Customer[] */
     private array $customers;
 
     public function __construct($pdo)
