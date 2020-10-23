@@ -17,11 +17,15 @@ Who is doing what?
 - Together: updating files from procedural to MVC
 
 ### Day 4: Friday
-...
+- Together: reviewing all files and adding comments
+- Trying to work on the extra's (login page)
+- Preparing the presentation
+- Present the project
+- Peer review
 
 ### Comments
 - Login and password of database are stored in config. To initiate the code, replace by your own details.
-- Import.sql by creating a database first and then add import file via terminal 
+- Import.sql by creating a database first and then add import file via terminal
 -------------------------------------------------
 
 # Title: PHP Price Calculator challenge
