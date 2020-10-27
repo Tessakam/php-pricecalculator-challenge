@@ -12,6 +12,7 @@ class Customer_Group
         $handle->execute();
         $result = $handle->fetchAll();
 
+        //link with database (different columns)
         $this->name = $result[0]['name'];
         $this->fixed_discount = $result[0]['fixed_discount'];
         $this->variable_discount = $result[0]['variable_discount'];
